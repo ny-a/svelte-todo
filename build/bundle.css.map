@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "../../App.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n    let todos = [\n        { id: 0, done: false, text: \"Sample Todo\" },\n    ];\n    let text = \"\";\n\n    $: nextId = Math.max(...todos.map(i => i.id)) + 1;\n\n    function addTodo() {\n        const newTodo = { id: nextId, done: false, text: text };\n        todos = [...todos, newTodo];\n        text = \"\";\n    }\n\n    function toggleDoneStatus(id) {\n        todos = todos.map(i => {\n            if (i.id === id) {\n                return {\n                    id: i.id,\n                    done: !i.done,\n                    text: i.text,\n                }\n            } else {\n                return i\n            }\n        })\n    }\n</script>\n\n<main>\n\t<h1>TODO List</h1>\n\n    <input bind:value={text} />\n    <button on:click={addTodo}>Add</button>\n\n    <div class=\"todoContainer\">\n        <ul>\n            {#each todos as todo}\n                <li on:click={toggleDoneStatus(todo.id)}>\n                    {#if todo.done}\n                        <s>{todo.text}</s>\n                    {:else}\n                        {todo.text}\n                    {/if}\n                </li>\n            {/each}\n        </ul>\n    </div>\n\n</main>\n\n<style>\n\tmain {\n\t\ttext-align: center;\n\t\tpadding: 1em;\n\t\tmax-width: 240px;\n\t\tmargin: 0 auto;\n\t}\n\n\th1 {\n\t\tcolor: #ff3e00;\n\t\ttext-transform: uppercase;\n\t\tfont-size: 4em;\n\t\tfont-weight: 100;\n\t}\n\n    .todoContainer {\n        margin: 0 auto;\n        max-width: 400px;\n    }\n\n    ul {\n        text-align: left;\n    }\n\n\t@media (min-width: 640px) {\n\t\tmain {\n\t\t\tmax-width: none;\n\t\t}\n\t}\n</style>\n"
+  ],
+  "names": [],
+  "mappings": "AAoDC,IAAI,cAAC,CAAC,AACL,UAAU,CAAE,MAAM,CAClB,OAAO,CAAE,GAAG,CACZ,SAAS,CAAE,KAAK,CAChB,MAAM,CAAE,CAAC,CAAC,IAAI,AACf,CAAC,AAED,EAAE,cAAC,CAAC,AACH,KAAK,CAAE,OAAO,CACd,cAAc,CAAE,SAAS,CACzB,SAAS,CAAE,GAAG,CACd,WAAW,CAAE,GAAG,AACjB,CAAC,AAEE,cAAc,cAAC,CAAC,AACZ,MAAM,CAAE,CAAC,CAAC,IAAI,CACd,SAAS,CAAE,KAAK,AACpB,CAAC,AAED,EAAE,cAAC,CAAC,AACA,UAAU,CAAE,IAAI,AACpB,CAAC,AAEJ,MAAM,AAAC,YAAY,KAAK,CAAC,AAAC,CAAC,AAC1B,IAAI,cAAC,CAAC,AACL,SAAS,CAAE,IAAI,AAChB,CAAC,AACF,CAAC"
+}
